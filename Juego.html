@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Adivinanza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f0f0;
+        }
+        input {
+            font-size: 18px;
+            padding: 10px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #mensaje {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>¡Adivina el Número!</h1>
+<p>Estoy pensando en un número entre 1 y 100. ¿Cuál crees que es?</p>
+
+<input type="number" id="numeroUsuario" placeholder="Introduce un número" min="1" max="100">
+<button onclick="adivinar()">Adivinar</button>
+
+<p id="mensaje"></p>
+
+<script>
+   
+    let numeroSecreto = Math.floor(Math.random() * 100) + 1;
+    let intentos = 0;
+
+    function adivinar() {
+        let numeroUsuario = document.getElementById("numeroUsuario").value;
+        let mensaje = document.getElementById("mensaje");
+        intentos++;
+
+       
+        if (numeroUsuario === "") {
+            mensaje.textContent = "Por favor, ingresa un número.";
+            return;
+        }
+
+        numeroUsuario = parseInt(numeroUsuario);
+
+        if (numeroUsuario < numeroSecreto) {
+            mensaje.textContent = "Demasiado bajo. Intenta de nuevo.";
+            mensaje.style.color = "black";
+            document.body.style.backgroundColor = "orange";
+        } else if (numeroUsuario > numeroSecreto) {
+            mensaje.textContent = "Demasiado alto. Intenta de nuevo.";
+            mensaje.style.color = "black";
+            document.body.style.backgroundColor = "orange"; 
+        } else {
+            mensaje.textContent = `¡Felicidades! Adivinaste el número en ${intentos} intentos.`;
+            mensaje.style.color = "black";
+            document.body.style.backgroundColor = "green"; 
+        }
+    }
+</script>
+
+</body>
+</html>
